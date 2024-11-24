@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://qkvib1nntlu7"]
+
+[node name="EXTRAS" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MenuBar" type="Panel" parent="."]
+visible = false
+custom_minimum_size = Vector2(0, 30)
+
+[node name="MenuBar" type="MenuBar" parent="MenuBar"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="File" type="PopupMenu" parent="MenuBar/MenuBar"]
+auto_translate_mode = 1
+item_count = 1
+item_0/text = "Save"
+
+[node name="Edit" type="PopupMenu" parent="MenuBar/MenuBar"]
+auto_translate_mode = 1
