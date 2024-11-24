@@ -44,11 +44,11 @@ func add_tab(file):
 	tab_container.current_tab = tab_container.get_child_count() - 1
 	
 func _ready():
-	initiate_files("/")
+	initiate_files("res://")
 	
 func _process(delta):
 	if Input.is_action_just_pressed("ui_up"):
-		add_tab("Billy")
+		add_tab("New Tab")
 	if Input.is_action_just_pressed("Save File"):
 		$FileDialog.show()
 		print(tab_container.get_current_tab_control().text)
@@ -84,7 +84,7 @@ func initiate_files(path):
 	#item.button_clicked
 
 func open_dir():
-	print("THingy happened")
+	print("Thingy happened")
 
 func _on_welcome_pressed():
 	var dialog = FileDialog.new()
