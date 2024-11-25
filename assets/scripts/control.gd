@@ -1,13 +1,41 @@
 extends Control
 
-@onready var editor_scene = preload("res://assets/scenes/editor.tscn")
+#@onready var editor_scene = preload("res://assets/scenes/editor.tscn")
 @onready var tab_container = $HSplitContainer/TabContainer
 @onready var FileSystem = $HSplitContainer/FileSystem
 
 func init_settings(editor):
-	var highlighter = editor.syntax_highlighter
+	#var highlighter = editor.syntax_highlighter
+	var highlighter = CodeHighlighter.new()
+	
+	editor.syntax_highlighter = highlighter
 
-	editor.set_syntax_highlighter(highlighter)
+	editor.add_theme_font_size_override("font_size", 22)
+	
+	# Set gutters
+	editor.gutters_draw_breakpoints_gutter = true
+	editor.gutters_draw_bookmarks = true
+	editor.gutters_draw_executing_lines = true
+	editor.gutters_draw_line_numbers = true
+	editor.gutters_draw_fold_gutter = true
+	
+	# Small settings
+	editor.code_completion_enabled = true
+	editor.indent_automatic = true
+	
+	editor.auto_brace_completion_enabled = true
+	editor.auto_brace_completion_highlight_matching = true
+	editor.scroll_smooth = false
+	editor.minimap_draw = true
+	editor.caret_type = 0 # 0 = line 1 = block
+	editor.caret_blink = true
+	editor.draw_tabs = true
+	
+	# Highlighting
+	highlighter.number_color = Color("#a1ffe0")
+	highlighter.symbol_color = Color("#abc9ff")
+	highlighter.function_color = Color("#57b3ff")
+	highlighter.member_variable_color = Color("#bce0ff")
 	
 	# Add keword color. In the future, the colors will probably be variables for customization
 	# Keywords
@@ -30,9 +58,10 @@ func init_settings(editor):
 
 func add_tab(file):
 	# Called when a new tab is open
-	var editor = editor_scene.instantiate()
+	var editor = CodeEdit.new()
 	
 	editor.name = file
+	print(editor)
 	editor = init_settings(editor)
 	
 	print(file + " created")
@@ -47,12 +76,13 @@ func _ready():
 	initiate_files("res://")
 	
 func _process(delta):
-	if Input.is_action_just_pressed("ui_up"):
+	if Input.is_action_just_pressed("New Tab"):
 		add_tab("New Tab")
+	if Input.is_action_just_pressed("Close Tab"):
+		tab_container.get_current_tab_control().queue_free() # Delete selected tab
 	if Input.is_action_just_pressed("Save File"):
 		$FileDialog.show()
-		print(tab_container.get_current_tab_control().text)
-		# Later, fix it so it doesn't still type S (issue #88768 on Github)
+		# Later, fix it so it doesn't still type S (issue #88768 on Godot Github)
 
 func _on_file_dialog_file_selected(path):
 	print(path)
