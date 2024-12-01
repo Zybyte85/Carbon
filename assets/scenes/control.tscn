@@ -1,6 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://cmnox5btpe376"]
+[gd_scene load_steps=6 format=3 uid="uid://cmnox5btpe376"]
 
 [ext_resource type="Script" path="res://assets/scripts/control.gd" id="1_hj8ea"]
+[ext_resource type="Texture2D" uid="uid://bs4iynnhblcu2" path="res://assets/icons/folder_symbolic.svg" id="2_e8rqu"]
+[ext_resource type="Texture2D" uid="uid://cvb4huyqq1djm" path="res://assets/icons/folder_symbolic_selected.svg" id="3_qpnex"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_tkdey"]
+shift_pressed = true
+ctrl_pressed = true
+keycode = 69
+
+[sub_resource type="Shortcut" id="Shortcut_ioyxo"]
+events = [SubResource("InputEventKey_tkdey")]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -20,34 +30,51 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.255659, 0.255659, 0.255659, 1)
 
-[node name="HSplitContainer" type="HSplitContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 0
 
-[node name="FileSystem" type="Tree" parent="HSplitContainer"]
+[node name="ButtonBar" type="VBoxContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
+[node name="ExplorerButton" type="TextureButton" parent="HBoxContainer/ButtonBar"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+tooltip_text = "Explorer"
+toggle_mode = true
+shortcut = SubResource("Shortcut_ioyxo")
+texture_normal = ExtResource("2_e8rqu")
+texture_pressed = ExtResource("3_qpnex")
+stretch_mode = 0
+
+[node name="HSplitContainer" type="HSplitContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="FileSystem" type="Tree" parent="HBoxContainer/HSplitContainer"]
+visible = false
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 drop_mode_flags = 1
 
-[node name="TabContainer" type="TabContainer" parent="HSplitContainer"]
+[node name="TabContainer" type="TabContainer" parent="HBoxContainer/HSplitContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 current_tab = 0
 drag_to_rearrange_enabled = true
 
-[node name="Welcome" type="Button" parent="HSplitContainer/TabContainer"]
+[node name="Welcome" type="Button" parent="HBoxContainer/HSplitContainer/TabContainer"]
 layout_mode = 2
 text = "Open File..."
 metadata/_tab_index = 0
 
-[node name="FileDialog" type="FileDialog" parent="."]
-size = Vector2i(303, 180)
-access = 2
-use_native_dialog = true
-
-[connection signal="tab_changed" from="HSplitContainer/TabContainer" to="." method="_on_tab_container_tab_changed"]
-[connection signal="pressed" from="HSplitContainer/TabContainer/Welcome" to="." method="_on_welcome_pressed"]
-[connection signal="file_selected" from="FileDialog" to="." method="_on_file_dialog_file_selected"]
+[connection signal="toggled" from="HBoxContainer/ButtonBar/ExplorerButton" to="." method="_on_explorer_button_toggled"]
+[connection signal="tab_changed" from="HBoxContainer/HSplitContainer/TabContainer" to="." method="_on_tab_container_tab_changed"]
+[connection signal="pressed" from="HBoxContainer/HSplitContainer/TabContainer/Welcome" to="." method="_on_welcome_pressed"]
