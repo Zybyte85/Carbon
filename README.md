@@ -1,7 +1,7 @@
 
 # Project Title
 
-Carbon (name subject to change) is a lightweight, fast, and easily extendable code editor made in Godot
+Carbon (name subject to change) is a lightweight and fast code editor made in Godot
 
 
 ## Roadmap
