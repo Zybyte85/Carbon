@@ -20,8 +20,3 @@ Carbon (name subject to change) is a lightweight and fast code editor made in Go
 ## Contributing
 
 Contributions are always welcome! Just look at the issues page to get started!
-
-## Possible names so far
-
-- Carbon
-- Bolt
