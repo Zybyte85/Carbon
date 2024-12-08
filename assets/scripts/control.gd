@@ -139,7 +139,7 @@ func initiate_files(path):
 			
 			item.set_text(0, file_name)
 			item.set_icon_max_width(0, 30)
-			item.set_icon(0, load("res://assets/icons/folder.svg"))
+			item.set_icon(0, load("res://assets/icons/folder.png"))
 	
 	#item.button_clicked
 

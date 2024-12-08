@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://cmnox5btpe376"]
 
 [ext_resource type="Script" path="res://assets/scripts/control.gd" id="1_hj8ea"]
-[ext_resource type="Texture2D" uid="uid://bs4iynnhblcu2" path="res://assets/icons/folder_symbolic.svg" id="2_e8rqu"]
-[ext_resource type="Texture2D" uid="uid://cvb4huyqq1djm" path="res://assets/icons/folder_symbolic_selected.svg" id="3_qpnex"]
+[ext_resource type="Texture2D" uid="uid://c0lcjjhwwbexb" path="res://assets/icons/folder_symbolic.png" id="2_ghy6f"]
+[ext_resource type="Texture2D" uid="uid://o2ddaoe84tg1" path="res://assets/icons/folder_symbolic_selected.png" id="3_54wfe"]
 
 [sub_resource type="InputEventKey" id="InputEventKey_tkdey"]
 shift_pressed = true
@@ -49,9 +49,10 @@ layout_mode = 2
 tooltip_text = "Explorer"
 toggle_mode = true
 shortcut = SubResource("Shortcut_ioyxo")
-texture_normal = ExtResource("2_e8rqu")
-texture_pressed = ExtResource("3_qpnex")
-stretch_mode = 0
+texture_normal = ExtResource("2_ghy6f")
+texture_pressed = ExtResource("3_54wfe")
+ignore_texture_size = true
+stretch_mode = 4
 
 [node name="HSplitContainer" type="HSplitContainer" parent="HBoxContainer"]
 layout_mode = 2
