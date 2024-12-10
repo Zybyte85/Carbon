@@ -19,4 +19,4 @@ Carbon (name subject to change) is a lightweight and fast code editor made in Go
 
 ## Contributing
 
-Contributions are always welcome! Just look at the issues page to get started!
+Contributions are always welcome! Just look at the [CONTRIBUTING.md file](CONTRIBUTING.md) to get started!
