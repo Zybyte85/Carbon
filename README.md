@@ -1,5 +1,5 @@
 
-# Project Title
+# Carbon
 
 Carbon (name subject to change) is a lightweight and fast code editor made in Godot
 

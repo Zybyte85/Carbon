@@ -8,7 +8,6 @@ extends Control
 @onready var config = ConfigFile.new()
 
 func init_settings(editor):
-	#var highlighter = editor.syntax_highlighter
 	var highlighter = CodeHighlighter.new()
 	
 	editor.syntax_highlighter = highlighter
