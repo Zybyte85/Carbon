@@ -17,7 +17,7 @@ func init_settings(editor):
 	editor.syntax_highlighter = highlighter
 
 	editor.add_theme_font_size_override("font_size", config.get_value("editor", "font_size"))
-	
+
 	# Set gutters
 	editor.gutters_draw_breakpoints_gutter = true
 	editor.gutters_draw_bookmarks = true
@@ -45,7 +45,7 @@ func init_settings(editor):
 	
 	# Add keword color. In the future, the colors will probably be variables for customization
 	# Keywords
-	for keyword in ["if", "else", "elif", "switch", "case", "default", "break", "continue", "return", "for", "while", "do", "foreach"]:
+	for keyword in ["if", "else", "elif", "switch", "case", "default", "break", "continue", "return", "for", "while", "do", "foreach", "import", "from"]:
 		highlighter.add_keyword_color(keyword, Color("#ff8ccc"))
 	
 	# Member keywords
@@ -56,7 +56,6 @@ func init_settings(editor):
 	highlighter.add_color_region('"', '"', Color("#ffeda1"))
 	highlighter.add_color_region("'", "'", Color("#ffeda1"))
 	highlighter.add_color_region("#", "", Color("#9c9c9c"))
-	highlighter.add_color_region("<", ">", Color("#ffeda1"))
 	highlighter.add_color_region("//", "", Color("#ffeda1"))
 	highlighter.add_color_region("/*", "*/", Color("#ffeda1"))
 	
@@ -81,6 +80,7 @@ func add_tab(file, is_file = true):
 	tab_container.current_tab = tab_container.get_child_count() - 1
 	
 func _ready():
+	# Temp for testing
 	initiate_files("user://")
 	
 	if !DirAccess.dir_exists_absolute("user://fonts"):
@@ -106,6 +106,13 @@ func _ready():
 	var tab_bar = tab_container.get_tab_bar()
 	tab_bar.tab_close_display_policy = TabBar.CLOSE_BUTTON_SHOW_ACTIVE_ONLY
 	tab_bar.tab_close_pressed.connect(close_tab)
+	
+	# Open file if determined from argument
+	var args = OS.get_cmdline_args()
+	print(args)
+	if args.size() > 0:
+		add_tab(args[0])
+		
 	
 func _process(delta):
 	if Input.is_action_just_pressed("New Tab"):
