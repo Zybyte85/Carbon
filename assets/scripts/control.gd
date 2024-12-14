@@ -17,7 +17,6 @@ func init_settings(editor):
 	editor.syntax_highlighter = highlighter
 
 	editor.add_theme_font_size_override("font_size", config.get_value("editor", "font_size"))
-
 	# Set gutters
 	editor.gutters_draw_breakpoints_gutter = true
 	editor.gutters_draw_bookmarks = true
