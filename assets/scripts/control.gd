@@ -1,11 +1,15 @@
 extends Control
 
-#@onready var tab_container = $HSplitContainer/TabContainer
-#@onready var FileSystem = $HSplitContainer/FileSystem
 @onready var tab_container = $HBoxContainer/HSplitContainer/TabContainer
 @onready var FileSystem = $HBoxContainer/HSplitContainer/FileSystem
 
 @onready var config = ConfigFile.new()
+
+func close_tab(selected):
+	# Pressing the close button returns the index so we get the node if it is an int
+	if typeof(selected) == TYPE_INT:
+		selected = tab_container.get_child(selected)
+	tab_container.remove_child(selected)
 
 func init_settings(editor):
 	var highlighter = CodeHighlighter.new()
@@ -98,12 +102,16 @@ func _ready():
 		config.save("user://settings.ini")
 	else:
 		print("Opening config file successful")
+		
+	var tab_bar = tab_container.get_tab_bar()
+	tab_bar.tab_close_display_policy = TabBar.CLOSE_BUTTON_SHOW_ACTIVE_ONLY
+	tab_bar.tab_close_pressed.connect(close_tab)
 	
 func _process(delta):
 	if Input.is_action_just_pressed("New Tab"):
 		add_tab("New Tab", false)
 	if Input.is_action_just_pressed("Close Tab"):
-		tab_container.get_current_tab_control().queue_free() # Delete selected tab
+		close_tab(tab_container.get_current_tab_control())
 	if Input.is_action_just_pressed("Save File"):
 		# Need to fix this later, but I'm to lazy to right now
 		var dialog = FileDialog.new()
