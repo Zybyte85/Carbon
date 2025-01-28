@@ -1,3 +1,6 @@
+<div align=center>
+  <img src=icon.png style="width: 256px;">
+</div>
 
 # Carbon
 
